@@ -1,6 +1,6 @@
 # conda create -n lightning python=3.7
 conda activate lightning
-pip install -r requirements
+pip install -r requirements.txt
 
 # install apex
 mkdir packages
