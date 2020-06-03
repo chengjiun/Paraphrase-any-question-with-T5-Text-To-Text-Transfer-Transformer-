@@ -187,7 +187,7 @@ args_dict = dict(
     gradient_accumulation_steps=16,
     n_gpu=1,
     early_stop_callback=False,
-    fp_16=False, # if you want to enable 16-bit training then install apex and set this to true
+    fp_16=True, # if you want to enable 16-bit training then install apex and set this to true
     opt_level='O1', # you can find out more on optimisation levels here https://nvidia.github.io/apex/amp.html#opt-levels-and-properties
     max_grad_norm=1.0, # if you enable 16-bit training then set this to a sensible value, 0.5 is a good default
     seed=42,
@@ -256,10 +256,11 @@ data = dataset[61]
 print(tokenizer.decode(data['source_ids']))
 print(tokenizer.decode(data['target_ids']))
 
-if not os.path.exists('t5_paraphrase'):
-    os.makedirs('t5_paraphrase')
+output_dir = 'weights/t5_paraphrase'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
-args_dict.update({'data_dir': 'paraphrase_data', 'output_dir': 't5_paraphrase', 'num_train_epochs':2,'max_seq_length':256})
+args_dict.update({'data_dir': 'paraphrase_data', 'output_dir': output_dir, 'num_train_epochs':2,'max_seq_length':256})
 args = argparse.Namespace(**args_dict)
 print(args_dict)
 
@@ -295,6 +296,6 @@ trainer.fit(model)
 print ("training finished")
 
 print ("Saving model")
-model.model.save_pretrained('t5_paraphrase')
+model.model.save_pretrained('weights/t5_paraphrase')
 
 print ("Saved model")
