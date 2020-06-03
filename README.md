@@ -1,3 +1,5 @@
+* In progress... 
+
 # Paraphrase any question with T5 (Text-To-Text Transfer Transformer) - Pretrained model and training script provided
 
 Using this program you can generate **paraphrases** of any given question.
